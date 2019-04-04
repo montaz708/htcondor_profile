@@ -1,0 +1,18 @@
+# An example of a job that will spawn a docker
+# container from the HTCondor "docker universe"
+# HTCondor will manange this container and we can use a 
+# default docker image as wel
+
+#Source: http://research.cs.wisc.edu/htcondor/manual/v8.8/DockerUniverseApplications.html#x24-1260002.12
+
+universe                = docker  
+docker_image            = debian  
+executable              = /bin/cat  
+arguments               = /etc/hosts  
+should_transfer_files   = YES  
+when_to_transfer_output = ON_EXIT  
+output                  = out.$(Process)  
+error                   = err.$(Process)  
+log                     = log.$(Process)  
+request_memory          = 100M  
+queue 1
