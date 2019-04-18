@@ -54,10 +54,10 @@ use SECURITY : HOST_BASED
 ##--------------------------------------------------------------------
 
 CONDOR_HOST = 192.168.1.1
-UID_DOMAIN = WORKGROUP
-CONDOR_ADMIN = 
+UID_DOMAIN = head.condortest.pdc-edu-lab-pg0.clemson.cloudlab.us
+CONDOR_ADMIN = alex.vazquez708@gmail.com
 TRUST_UID_DOMAIN=true
-SMTP_SERVER = 
+## SMTP_SERVER = 
 ALLOW_READ = *
 ALLOW_WRITE = $(CONDOR_HOST), $(IP_ADDRESS)
 ALLOW_ADMINISTRATOR = $(IP_ADDRESS)

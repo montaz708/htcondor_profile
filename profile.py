@@ -25,9 +25,9 @@ link = request.LAN("lan")
 # Generate the nodes
 for i in range(5):
     if i == 0:
-        node = request.XenVM("head")
+        node = request.RawPC("head")
     else:
-        node = request.XenVM("node" + str(i))
+        node = request.RawPC("node" + str(i))
     node.cores = 4
     node.ram = 4096
     node.routable_countrol_ip = "true"
@@ -46,9 +46,11 @@ for i in range(5):
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="sudo bash /local/repository/passwordless.sh"))
     node.addService(rspec.Execute(shell="/bin/sh",
-                                  command="DEBIAN_FRONTEND=noninteractive sudo apt-get -y install htcondor"))
+                                 command="sudo bash /local/repository/setup_docker.sh"))
     node.addService(rspec.Execute(shell="/bin/sh",
-                                 command="sudo cp /local/repository/condor_config /etc/condor/condor_config"))
+                                  command="DEBIAN_FRONTEND=noninteractive sudo apt-get -y install htcondor"))
+"""     node.addService(rspec.Execute(shell="/bin/sh",
+                                 command="sudo cp /local/repository/condor_config /etc/condor/condor_config")) """
     # add the condor user to the docker group so it can execute commands?
     node.addService(rspec.Execute(shell='/bin/sh',
                                   command='sudo usermod -aG docker condor'))
