@@ -44,12 +44,13 @@ for i in range(5):
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/"))
     node.addService(rspec.Execute(shell="/bin/sh",
-                                  command="sudo bash /local/repository/get_condor_from_repo.sh"))
-    node.addService(rspec.Execute(shell="sh",
                                   command="sudo bash /local/repository/passwordless.sh"))
-    node.addService(rspec.Execute(shell="sh",
-                                  command="sudo bash /local/repository/install_docker.sh"))
-    node.addService(rspec.Execute(shell="sh",
+    node.addService(rspec.Execute(shell="/bin/sh",
+                                  command="sudo apt-get -y install htcondor"))
+    node.addService(rspec.Execute(shell="/bin/sh",
                                  command="sudo cp /local/repository/condor_config /etc/condor/condor_config"))
+    # add the condor user to the docker group so it can execute commands?
+    node.addService(rspec.Execute(shell='/bin/sh',
+                                  command='sudo usermod -aG docker condor'))
 # Print the RSpec to the enclosing page.
 portal.context.printRequestRSpec(request)
