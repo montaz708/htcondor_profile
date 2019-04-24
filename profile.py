@@ -49,10 +49,10 @@ for i in range(5):
                                  command="sudo bash /local/repository/setup_docker.sh"))
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="DEBIAN_FRONTEND=noninteractive sudo apt-get -y install htcondor"))
-"""     node.addService(rspec.Execute(shell="/bin/sh",
-                                 command="sudo cp /local/repository/condor_config /etc/condor/condor_config")) """
-    # add the condor user to the docker group so it can execute commands?
-    node.addService(rspec.Execute(shell='/bin/sh',
-                                  command='sudo usermod -aG docker condor'))
+     #node.addService(rspec.Execute(shell="/bin/sh",
+                                 #command="sudo cp /local/repository/condor_config /etc/condor/condor_config"))
+# add the condor user to the docker group so it can execute commands?
+    node.addService(rspec.Execute(shell="/bin/sh",
+                                  command="sudo usermod -aG docker condor"))
 # Print the RSpec to the enclosing page.
 portal.context.printRequestRSpec(request)
