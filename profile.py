@@ -54,5 +54,7 @@ for i in range(5):
 # add the condor user to the docker group so it can execute commands?
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="sudo usermod -aG docker condor"))
+    node.addService(rspec.Execute(shell="/bin/sh",
+                                 command="sudo docker pull aa8y/spark"))
 # Print the RSpec to the enclosing page.
 portal.context.printRequestRSpec(request)
