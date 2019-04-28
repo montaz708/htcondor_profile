@@ -46,7 +46,7 @@ for i in range(5):
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="sudo bash /local/repository/passwordless.sh"))
     node.addService(rspec.Execute(shell="/bin/sh",
-                                 command="sudo bash /local/repository/setup_docker.sh"))
+                                 command="sudo bash /local/repository/install_docker.sh"))
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="DEBIAN_FRONTEND=noninteractive sudo apt-get -y install htcondor"))
     node.addService(rspec.Execute(shell="/bin/sh",
@@ -54,7 +54,19 @@ for i in range(5):
 # add the condor user to the docker group so it can execute commands?
     node.addService(rspec.Execute(shell="/bin/sh",
                                   command="sudo usermod -aG docker condor"))
-    node.addService(rspec.Execute(shell="/bin/sh",
-                                 command="sudo docker pull aa8y/spark"))
 # Print the RSpec to the enclosing page.
+    if i == 0:
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="docker swarm init"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo mkdir /docker_key"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo docker swarm join-token worker -q > /docker_key/token.txt"
+        ))
+
 portal.context.printRequestRSpec(request)
