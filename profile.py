@@ -58,7 +58,7 @@ for i in range(5):
     if i == 0:
         node.addService(rspec.Execute(
             shell="/bin/sh",
-            command="sudo docker swarm init"
+            command="sudo docker swarm init --advertise-addr 192.168.1.1"
         ))
         node.addService(rspec.Execute(
             shell="/bin/sh",
