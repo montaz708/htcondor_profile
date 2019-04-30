@@ -69,5 +69,33 @@ for i in range(5):
             shell="/bin/sh",
             command="sudo docker swarm join-token worker -q > /docker_key/token.txt"
         ))
-
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo apt install nfs-kernel-server"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo systemctl start nfs-kernel-server.service"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="exportfs -a"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo cp /local/repository/exports /etc/exports"
+        ))
+    else:
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo apt install nfs-common"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo mkdir /dokery_key"
+        ))
+        node.addService(rspec.Execute(
+            shell="/bin/sh",
+            command="sudo mount 192.168.1.1:/docker_key /docker_key"
+        ))
 portal.context.printRequestRSpec(request)
