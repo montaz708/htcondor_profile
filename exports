@@ -1,0 +1,4 @@
+/docker_key 192.168.1.2(ro,sync,no_root_squash)
+/docker_key 192.168.1.3(ro,sync,no_root_squash)
+/docker_key 192.168.1.4(ro,sync,no_root_squash)
+/docker_key 192.168.1.5(ro,sync,no_root_squash)
