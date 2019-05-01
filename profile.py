@@ -88,14 +88,14 @@ for i in range(5):
     else:
         node.addService(rspec.Execute(
             shell="/bin/sh",
-            command="sudo apt install nfs-common"
+            command="sudo apt install nfs-common -y"
         ))
         node.addService(rspec.Execute(
             shell="/bin/sh",
-            command="sudo mkdir /dokery_key"
+            command="sudo mkdir /docker_key"
         ))
         node.addService(rspec.Execute(
             shell="/bin/sh",
-            command="sudo mount 192.168.1.1:/docker_key /docker_key"
+            command="sudo mount -t 192.168.1.1:/docker_key /docker_key"
         ))
 portal.context.printRequestRSpec(request)
